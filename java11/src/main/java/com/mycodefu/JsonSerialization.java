@@ -1,4 +1,4 @@
-package com.sydneyjavameetup;
+package com.mycodefu;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;

@@ -36,6 +36,38 @@ jobs:
             - java8/target/java8-dev.jar
             - java8/serverless.yml
 
+  build-java11:
+    docker:
+      - image: circleci/openjdk:11-jdk
+
+    working_directory: ~/repo/java11
+
+    environment:
+      MAVEN_OPTS: -Xmx3200m
+
+    steps:
+      - checkout:
+          path: ~/repo
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      - run: mvn package
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - java11/target/java11-dev.jar
+            - java11/serverless.yml
+
 
   serverless-deploy:
     docker:
@@ -49,19 +81,21 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-dependencies-node-serverless-1-61-2
+            - v1-dependencies-node-serverless-1-61-2-serverless-domain-manager-3-3-1
 
       - run: npm install serverless@1.61.2 serverless-domain-manager@3.3.1
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-node-serverless-1-61-2
+          key: v1-dependencies-node-serverless-1-61-2-serverless-domain-manager-3-3-1
 
       - run:
           name: Deploy to AWS
           command: |
             cd java8
+            ../node_modules/serverless/bin/serverless deploy
+            cd ../java11
             ../node_modules/serverless/bin/serverless deploy
 
 workflows:
@@ -69,6 +103,8 @@ workflows:
   build_and_test:
     jobs:
       - build-java8
+      - build-java11
       - serverless-deploy:
           requires:
             - build-java8
+            - build-java11

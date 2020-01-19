@@ -1,16 +1,16 @@
 # Welcome to Serverless!
 # Ref: docs.serverless.com
 
-service: java-lambda-language-compare-8
+service: java-lambda-language-compare-11
 provider:
   name: aws
-  runtime: java8
+  runtime: java11
   logs:
     restApi: true
   region: ap-southeast-2
 
 package:
-  artifact: target/java8-dev.jar
+  artifact: target/java11-dev.jar
 
 plugins:
   - serverless-domain-manager
@@ -26,5 +26,5 @@ functions:
 custom:
   customDomain:
     domainName: api.mycodefu.com
-    basePath: '/java-language-test/java8'
+    basePath: '/java-language-test/java11'
     stage: ${self:provider.stage}

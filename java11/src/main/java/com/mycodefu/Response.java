@@ -1,4 +1,4 @@
-package com.sydneyjavameetup;
+package com.mycodefu;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.fasterxml.jackson.annotation.JsonInclude;

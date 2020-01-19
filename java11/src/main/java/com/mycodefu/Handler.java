@@ -1,4 +1,4 @@
-package com.sydneyjavameetup;
+package com.mycodefu;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -9,8 +9,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.sydneyjavameetup.JsonSerialization.objectMapper;
-import static com.sydneyjavameetup.JsonSerialization.prettyObjectWriter;
+import static com.mycodefu.JsonSerialization.objectMapper;
+import static com.mycodefu.JsonSerialization.prettyObjectWriter;
 
 public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 	private static final AtomicInteger executionCount = new AtomicInteger(0);
