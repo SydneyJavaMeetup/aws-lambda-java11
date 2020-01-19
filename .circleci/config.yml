@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build-java8:
+  build:
     docker:
       - image: circleci/openjdk:8-jdk
 
