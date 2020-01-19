@@ -1,4 +1,4 @@
-package com.serverless;
+package com.sydneyjavameetup;
 
 import java.util.Map;
 

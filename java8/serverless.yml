@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: java11
+service: java-lambda-language-compare-8
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
@@ -23,10 +23,11 @@ service: java11
 provider:
   name: aws
   runtime: java8
-
+  logs:
+    restApi: true
 # you can overwrite defaults here
 #  stage: dev
-#  region: us-east-1
+  region: ap-southeast-2
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
@@ -50,18 +51,18 @@ provider:
 
 # you can add packaging information here
 package:
-  artifact: target/hello-dev.jar
+  artifact: target/java8-dev.jar
 
 functions:
-  hello:
-    handler: com.serverless.Handler
+  java8:
+    handler: com.sydneyjavameetup.Handler
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
-#    events:
-#      - http:
-#          path: users/create
-#          method: get
+    events:
+      - http:
+          path: /javatest/java8
+          method: get
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)

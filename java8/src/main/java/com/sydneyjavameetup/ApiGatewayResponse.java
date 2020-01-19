@@ -1,13 +1,11 @@
-package com.serverless;
+package com.sydneyjavameetup;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -42,13 +40,11 @@ public class ApiGatewayResponse {
 		return isBase64Encoded;
 	}
 
-	public static Builder builder() {
-		return new Builder();
+	public static Builder builder(LambdaLogger logger) {
+		return new Builder(logger);
 	}
 
 	public static class Builder {
-
-		private static final Logger LOG = LogManager.getLogger(ApiGatewayResponse.Builder.class);
 
 		private static final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -58,6 +54,11 @@ public class ApiGatewayResponse {
 		private Object objectBody;
 		private byte[] binaryBody;
 		private boolean base64Encoded;
+		private LambdaLogger logger;
+
+		public Builder(LambdaLogger logger) {
+			this.logger = logger;
+		}
 
 		public Builder setStatusCode(int statusCode) {
 			this.statusCode = statusCode;
@@ -118,7 +119,7 @@ public class ApiGatewayResponse {
 				try {
 					body = objectMapper.writeValueAsString(objectBody);
 				} catch (JsonProcessingException e) {
-					LOG.error("failed to serialize object", e);
+					logger.log(String.format("failed to serialize object:\n%s", e));
 					throw new RuntimeException(e);
 				}
 			} else if (binaryBody != null) {
