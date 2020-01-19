@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  build-java8:
     docker:
       - image: circleci/openjdk:8-jdk
 
@@ -34,4 +34,39 @@ jobs:
           root: ~/repo
           paths:
             - java8/target/java8-dev.jar
+            - java8/serverless.yml
 
+
+  serverless-deploy:
+    docker:
+    - image: circleci/node:12
+
+    working_directory: ~/repo
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-node-serverless
+
+      - run: npm install serverless
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-node-serverless
+
+      - run:
+          name: Deploy to AWS
+          command: ./node_modules/serverless/bin/serverless deploy
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build-java8
+      - serverless-deploy:
+          requires:
+            - build-java8
