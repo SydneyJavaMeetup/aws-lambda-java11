@@ -8,8 +8,11 @@ import java.util.Map;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 public class ApiGatewayResponse {
+	public static final ObjectMapper objectMapper = new ObjectMapper();
+	public static final ObjectWriter prettyObjectWriter = objectMapper.writerWithDefaultPrettyPrinter();
 
 	private final int statusCode;
 	private final String body;
@@ -45,8 +48,6 @@ public class ApiGatewayResponse {
 	}
 
 	public static class Builder {
-
-		private static final ObjectMapper objectMapper = new ObjectMapper();
 
 		private int statusCode = 200;
 		private Map<String, String> headers = Collections.emptyMap();
