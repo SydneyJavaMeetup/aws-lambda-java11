@@ -26,5 +26,5 @@ functions:
 custom:
   customDomain:
     domainName: api.mycodefu.com
-    basePath: '/java-language-test/java8'
+    basePath: 'java-language-test/java8'
     stage: ${self:provider.stage}
