@@ -1,15 +1,14 @@
 package com.sydneyjavameetup;
 
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.fasterxml.jackson.annotation.JsonInclude;
-
-import java.util.Map;
 
 public class Response {
 	private final int executionCount;
 	private final String message;
-	private final Map<String, Object> input;
+	private final APIGatewayProxyRequestEvent input;
 
-	public Response(int executionCount, String message, Map<String, Object> input) {
+	public Response(int executionCount, String message, APIGatewayProxyRequestEvent input) {
 		this.executionCount = executionCount;
 		this.message = message;
 		this.input = input;
@@ -28,7 +27,7 @@ public class Response {
 	}
 
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	public Map<String, Object> getInput() {
+	public APIGatewayProxyRequestEvent getInput() {
 		return this.input;
 	}
 
