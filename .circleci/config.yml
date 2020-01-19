@@ -49,14 +49,14 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-dependencies-node-serverless
+            - v1-dependencies-node-serverless-1-61-2
 
-      - run: npm install serverless
+      - run: npm install serverless@1.61.2
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-node-serverless
+          key: v1-dependencies-node-serverless-1-61-2
 
       - run:
           name: Deploy to AWS
