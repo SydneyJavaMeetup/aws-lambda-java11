@@ -51,7 +51,7 @@ jobs:
           keys:
             - v1-dependencies-node-serverless-1-61-2
 
-      - run: npm install serverless@1.61.2
+      - run: npm install serverless@1.61.2 serverless-domain-manager@3.3.1
 
       - save_cache:
           paths:
