@@ -8,13 +8,14 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.sydneyjavameetup.ApiGatewayResponse.prettyObjectWriter;
+import static com.sydneyjavameetup.JsonSerialization.objectMapper;
+import static com.sydneyjavameetup.JsonSerialization.prettyObjectWriter;
 
-public class Handler implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
+public class Handler implements RequestHandler<Map<String, Object>, JsonSerialization> {
 	private static final AtomicInteger executionCount = new AtomicInteger(0);
 
 	@Override
-	public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
+	public JsonSerialization handleRequest(Map<String, Object> input, Context context) {
 		boolean DEBUG =
 				input.containsKey("queryStringParameters")
 				&& input.get("queryStringParameters") instanceof Map
@@ -25,10 +26,19 @@ public class Handler implements RequestHandler<Map<String, Object>, ApiGatewayRe
 			}
 		} catch (JsonProcessingException ignored) {}
 
-		Response responseBody = new Response(executionCount.getAndIncrement(), "Go Serverless v1.x! Your function executed successfully!", DEBUG ? input : null);
-		return ApiGatewayResponse.builder(context.getLogger())
+		Response response = new Response(executionCount.getAndIncrement(), "Go Serverless v1.x! Your function executed successfully!", DEBUG ? input : null);
+		try {
+			String responseString = objectMapper.writeValueAsString(response);
+
+
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
+
+		return JsonSerialization.builder(context.getLogger())
 				.setStatusCode(200)
-				.setObjectBody(responseBody)
+				.setObjectBody(response)
 				.setHeaders(Collections.singletonMap("X-Powered-By", "AWS Lambda & serverless"))
 				.build();
 	}
