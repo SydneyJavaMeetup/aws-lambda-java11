@@ -17,7 +17,9 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 
 	@Override
 	public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent input, Context context) {
-		boolean DEBUG = "true".equalsIgnoreCase(input.getQueryStringParameters().get("debug"));
+		boolean DEBUG = input.getQueryStringParameters() != null
+				&& "true".equalsIgnoreCase(input.getQueryStringParameters().get("debug"));
+
 		try {
 			if (DEBUG) {
 				context.getLogger().log(String.format("received: \n%s", prettyObjectWriter.writeValueAsString(input)));
