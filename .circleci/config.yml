@@ -62,7 +62,7 @@ jobs:
           name: Deploy to AWS
           command: |
             cd java8
-            ./node_modules/serverless/bin/serverless deploy
+            ../node_modules/serverless/bin/serverless deploy
 
 workflows:
   version: 2
