@@ -12,5 +12,3 @@ target
 
 # Serverless directories
 .serverless
-/aws-lambda-java11.iml
-/.idea/
