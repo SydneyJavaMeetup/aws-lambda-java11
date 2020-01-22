@@ -69,7 +69,35 @@ jobs:
             - java11/serverless.yml
 
 
-  serverless-deploy:
+  serverless-deploy-java-11:
+    docker:
+    - image: circleci/node:12
+
+    working_directory: ~/repo
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-node-serverless-1-61-2-serverless-domain-manager-3-3-1
+
+      - run: npm install serverless@1.61.2 serverless-domain-manager@3.3.1
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-node-serverless-1-61-2-serverless-domain-manager-3-3-1
+
+      - run:
+          name: Deploy to AWS
+          command: |
+            cd java11
+            ../node_modules/serverless/bin/serverless deploy
+
+
+  serverless-deploy-java8:
     docker:
     - image: circleci/node:12
 
@@ -95,8 +123,6 @@ jobs:
           command: |
             cd java8
             ../node_modules/serverless/bin/serverless deploy
-            cd ../java11
-            ../node_modules/serverless/bin/serverless deploy
 
 workflows:
   version: 2
@@ -104,7 +130,9 @@ workflows:
     jobs:
       - build-java8
       - build-java11
-      - serverless-deploy:
+      - serverless-deploy-java8:
           requires:
             - build-java8
+      - serverless-deploy-java11:
+          requires:
             - build-java11
