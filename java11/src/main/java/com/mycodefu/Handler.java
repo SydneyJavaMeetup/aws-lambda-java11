@@ -26,7 +26,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 			}
 		} catch (JsonProcessingException ignored) {}
 
-		Response response = new Response(executionCount.getAndIncrement(), "Go Serverless v1.x! Your function executed successfully!", DEBUG ? input : null);
+		Response response = new Response(executionCount.getAndIncrement(), "Java 11 Lambda!", DEBUG ? input : null);
 		try {
 			String responseString = objectMapper.writeValueAsString(response);
 			APIGatewayProxyResponseEvent responseEvent = new APIGatewayProxyResponseEvent();
