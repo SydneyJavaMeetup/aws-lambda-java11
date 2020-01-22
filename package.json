@@ -1,0 +1,12 @@
+{
+  "name": "lambda-language-comparison",
+  "version": "1.0.0",
+  "description": "A comparison of Java 11 in AWS Lambda with Java 8.",
+  "scripts": {
+    "deploy": "sls deploy"
+  },
+  "dependencies": {
+    "serverless": "^1.61.3",
+    "serverless-domain-manager": "^3.3.1"
+  }
+}

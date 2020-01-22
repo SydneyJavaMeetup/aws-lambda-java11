@@ -1,0 +1,41 @@
+# Welcome to Serverless!
+# Ref: docs.serverless.com
+
+service: lambda-language-comparison
+provider:
+  name: aws
+  logs:
+    restApi: true
+  region: ap-southeast-2
+
+package:
+  individually: true
+
+plugins:
+  - serverless-domain-manager
+
+functions:
+  java8:
+    runtime: java8
+    package:
+      artifact: java8/target/java8-dev.jar
+    handler: com.mycodefu.Handler
+    events:
+      - http:
+          path: /java8
+          method: get
+  java11:
+    runtime: java11
+    package:
+      artifact: java11/target/java11-dev.jar
+    handler: com.mycodefu.Handler
+    events:
+      - http:
+          path: /java11
+          method: get
+
+custom:
+  customDomain:
+    domainName: api.mycodefu.com
+    basePath: 'language-test'
+    stage: ${self:provider.stage}
