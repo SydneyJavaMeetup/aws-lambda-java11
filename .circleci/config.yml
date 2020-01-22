@@ -69,7 +69,7 @@ jobs:
             - java11/serverless.yml
 
 
-  serverless-deploy-java-11:
+  deploy-java11:
     docker:
     - image: circleci/node:12
 
@@ -97,7 +97,7 @@ jobs:
             ../node_modules/serverless/bin/serverless deploy
 
 
-  serverless-deploy-java8:
+  deploy-java8:
     docker:
     - image: circleci/node:12
 
@@ -130,9 +130,9 @@ workflows:
     jobs:
       - build-java8
       - build-java11
-      - serverless-deploy-java8:
+      - deploy-java8:
           requires:
             - build-java8
-      - serverless-deploy-java11:
+      - deploy-java11:
           requires:
             - build-java11
