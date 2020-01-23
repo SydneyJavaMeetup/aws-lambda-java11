@@ -26,8 +26,6 @@ functions:
           method: get
   java11:
     runtime: java11
-    provisionedConcurrency: 50
-    memorySize: 3008
     package:
       artifact: java11/target/java11-dev.jar
     handler: com.mycodefu.Handler
