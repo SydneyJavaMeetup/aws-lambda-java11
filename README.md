@@ -1,7 +1,22 @@
-# AWS Lambda - Java 11 and New AWS Lambda Features
+# AWS Lambda - Java 11
 A comparison of AWS Lambda Java 11 with Java 8 (and NodeJS for reference).
 
 #### Comparing Languages
+
+##### Feature Changes
+There are several new language features in Java 11, some of which may be beneficial for AWS Lambda
+use-cases. 
+
+Notably:
+* Performance enhancements (although in the tests here no significant difference was apparent)
+* New Http library:
+https://openjdk.java.net/groups/net/httpclient/intro.html
+
+One major feature of Java 9+ is the module system. It is disappointing to note that AWS Lambda
+has not yet used this capability and that Java still misses the capability to build lighter 
+weight quick starting functions similar to the capabilities offered in NodeJS.
+
+##### Performance
 
 Results from k6/Graphana for load test runs:
 ![k6-results](k6-run.png)
