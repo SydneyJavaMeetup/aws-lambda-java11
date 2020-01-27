@@ -26,7 +26,7 @@ plugins:
 functions:
   nodejs:
     runtime: nodejs12.x
-    handler: node/handler
+    handler: node12/handler
     package:
       exclude:
         - '.circleci/**'
@@ -37,7 +37,7 @@ functions:
         - '*.md'
         - '*.iml'
         - '*.jar'
-        - '*.js'
+        - 'k6*.js'
         - '*.config.js'
         - 'LICENSE'
         - '*.sh'
