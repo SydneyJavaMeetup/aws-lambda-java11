@@ -18,7 +18,7 @@ weight quick starting functions similar to the capabilities offered in NodeJS.
 
 ##### Performance
 
-Results from k6/Graphana for load test runs:
+Results from k6/Graphana for load test runs, beginning with NodeJS, then Java 8 followed by Java 11:
 ![k6-results](k6-run.png)
 
 Conclusions:
