@@ -15,7 +15,7 @@ provider:
     - Effect: Allow
       Action:
         - "dynamodb:*"
-      Resource: "arn:aws:dynamodb:ap-southeast-2:202544469228:table/LanguageTest"
+      Resource: "arn:aws:dynamodb:ap-southeast-2:*:table/LanguageTest"
 
 package:
   individually: true
