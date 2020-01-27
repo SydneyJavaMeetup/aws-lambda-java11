@@ -10,7 +10,7 @@ export let options = {
 };
 
 export default function() {
-    let res = http.get("https://api.mycodefu.com/language-test/java11");
+    let res = http.get("https://api.mycodefu.com/language-test/node12");
     check(res, {
         "status was 200": (r) => r.status == 200
     });

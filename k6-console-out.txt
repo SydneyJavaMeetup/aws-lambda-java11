@@ -1,0 +1,107 @@
+Node12
+
+          /\      |‾‾|  /‾‾/  /‾/
+     /\  /  \     |  |_/  /  / /
+    /  \/    \    |      |  /  ‾‾\
+   /          \   |  |‾\  \ | (_) |
+  / __________ \  |__|  \__\ \___/ .io
+
+  execution: local
+     output: influxdb=http://localhost:8086/myk6db (http://localhost:8086)
+     script: k6-node12.js
+
+    duration: -,  iterations: -
+         vus: 1, max: 20
+
+    done [==========================================================] 2m30s / 2m30s
+
+    ✗ status was 200
+     ↳  99% — ✓ 39816 / ✗ 36
+
+    checks.....................: 99.90% ✓ 39815 ✗ 36
+    data_received..............: 20 MB  133 kB/s
+    data_sent..................: 1.7 MB 12 kB/s
+    http_req_blocked...........: avg=34.72µs min=0s      med=1µs     max=246.97ms p(90)=1µs     p(95)=1µs
+    http_req_connecting........: avg=9.16µs  min=0s      med=0s      max=71.98ms  p(90)=0s      p(95)=0s
+    http_req_duration..........: avg=60.1ms  min=38.49ms med=58.34ms max=1.06s    p(90)=71.1ms  p(95)=77.76ms
+    http_req_receiving.........: avg=64.3µs  min=11µs    med=53µs    max=8.38ms   p(90)=93µs    p(95)=125µs
+    http_req_sending...........: avg=73.42µs min=15µs    med=63µs    max=3.12ms   p(90)=113µs   p(95)=145µs
+    http_req_tls_handshaking...: avg=23.97µs min=0s      med=0s      max=205.25ms p(90)=0s      p(95)=0s
+    http_req_waiting...........: avg=59.97ms min=38.44ms med=58.2ms  max=1.06s    p(90)=70.94ms p(95)=77.57ms
+    http_reqs..................: 39851  265.672755/s
+    iteration_duration.........: avg=60.55ms min=38.86ms med=58.7ms  max=1.06s    p(90)=71.48ms p(95)=78.26ms
+    iterations.................: 39851  265.672755/s
+    vus........................: 1      min=1   max=20
+    vus_max....................: 20     min=20  max=20
+
+Java8
+
+          /\      |‾‾|  /‾‾/  /‾/
+     /\  /  \     |  |_/  /  / /
+    /  \/    \    |      |  /  ‾‾\
+   /          \   |  |‾\  \ | (_) |
+  / __________ \  |__|  \__\ \___/ .io
+
+  execution: local
+     output: influxdb=http://localhost:8086/myk6db (http://localhost:8086)
+     script: k6-java8.js
+
+    duration: -,  iterations: -
+         vus: 1, max: 20
+
+    done [==========================================================] 2m30s / 2m30s
+
+    ✗ status was 200
+     ↳  99% — ✓ 44508 / ✗ 68
+
+    checks.....................: 99.84% ✓ 44508 ✗ 68
+    data_received..............: 24 MB  159 kB/s
+    data_sent..................: 1.9 MB 13 kB/s
+    http_req_blocked...........: avg=29.58µs min=0s      med=1µs     max=227.07ms p(90)=1µs     p(95)=1µs
+    http_req_connecting........: avg=7.2µs   min=0s      med=0s      max=23.61ms  p(90)=0s      p(95)=0s
+    http_req_duration..........: avg=53.77ms min=36.05ms med=49.71ms max=4.6s     p(90)=59.72ms p(95)=65.93ms
+    http_req_receiving.........: avg=64.59µs min=13µs    med=51µs    max=7.46ms   p(90)=99µs    p(95)=137µs
+    http_req_sending...........: avg=72.85µs min=13µs    med=58µs    max=8.09ms   p(90)=116µs   p(95)=157µs
+    http_req_tls_handshaking...: avg=21.13µs min=0s      med=0s      max=192.54ms p(90)=0s      p(95)=0s
+    http_req_waiting...........: avg=53.64ms min=35.87ms med=49.57ms max=4.6s     p(90)=59.58ms p(95)=65.83ms
+    http_reqs..................: 44576  297.172741/s
+    iteration_duration.........: avg=54.12ms min=36.26ms med=49.95ms max=4.66s    p(90)=60.06ms p(95)=66.35ms
+    iterations.................: 44576  297.172741/s
+    vus........................: 1      min=1   max=20
+    vus_max....................: 20     min=20  max=20
+
+Java11
+
+          /\      |‾‾|  /‾‾/  /‾/
+     /\  /  \     |  |_/  /  / /
+    /  \/    \    |      |  /  ‾‾\
+   /          \   |  |‾\  \ | (_) |
+  / __________ \  |__|  \__\ \___/ .io
+
+  execution: local
+     output: influxdb=http://localhost:8086/myk6db (http://localhost:8086)
+     script: k6-java11.js
+
+    duration: -,  iterations: -
+         vus: 1, max: 20
+
+    done [==========================================================] 2m30s / 2m30s
+
+    ✗ status was 200
+     ↳  99% — ✓ 43593 / ✗ 64
+
+    checks.....................: 99.85% ✓ 43593 ✗ 64
+    data_received..............: 24 MB  156 kB/s
+    data_sent..................: 1.9 MB 13 kB/s
+    http_req_blocked...........: avg=34.03µs min=0s      med=1µs     max=373.74ms p(90)=1µs     p(95)=1µs
+    http_req_connecting........: avg=7.78µs  min=0s      med=0s      max=45.82ms  p(90)=0s      p(95)=0s
+    http_req_duration..........: avg=54.93ms min=36.1ms  med=49.63ms max=4.84s    p(90)=60.44ms p(95)=68.28ms
+    http_req_receiving.........: avg=65.6µs  min=11µs    med=50µs    max=5.14ms   p(90)=101µs   p(95)=143µs
+    http_req_sending...........: avg=73.52µs min=14µs    med=56µs    max=6.27ms   p(90)=117µs   p(95)=160µs
+    http_req_tls_handshaking...: avg=23.8µs  min=0s      med=0s      max=291.58ms p(90)=0s      p(95)=0s
+    http_req_waiting...........: avg=54.79ms min=36.04ms med=49.5ms  max=4.84s    p(90)=60.28ms p(95)=68.13ms
+    http_reqs..................: 43659  291.059228/s
+    iteration_duration.........: avg=55.25ms min=36.22ms med=49.88ms max=5.12s    p(90)=60.74ms p(95)=68.65ms
+    iterations.................: 43657  291.045894/s
+    vus........................: 1      min=1   max=20
+    vus_max....................: 20     min=20  max=20
