@@ -6,6 +6,8 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -17,16 +19,19 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 
 	@Override
 	public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent input, Context context) {
-		boolean DEBUG = input.getQueryStringParameters() != null
-				&& "true".equalsIgnoreCase(input.getQueryStringParameters().get("debug"));
-
+		DebugOutput debugOutput = null;
 		try {
+			boolean DEBUG = input.getQueryStringParameters() != null
+					&& "true".equalsIgnoreCase(input.getQueryStringParameters().get("debug"));
 			if (DEBUG) {
 				context.getLogger().log(String.format("received: \n%s", prettyObjectWriter.writeValueAsString(input)));
+
+				RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
+				debugOutput = new DebugOutput(input, runtimeMxBean.getInputArguments());
 			}
 		} catch (JsonProcessingException ignored) {}
 
-		Response response = new Response(executionCount.getAndIncrement(), "Java 11 Lambda!", DEBUG ? input : null);
+		Response response = new Response(executionCount.getAndIncrement(), "Java 11 Lambda!", debugOutput);
 		try {
 			String responseString = objectMapper.writeValueAsString(response);
 			APIGatewayProxyResponseEvent responseEvent = new APIGatewayProxyResponseEvent();

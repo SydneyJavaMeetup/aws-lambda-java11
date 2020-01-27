@@ -1,14 +1,13 @@
 package com.mycodefu;
 
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class Response {
 	private final int executionCount;
 	private final String message;
-	private final APIGatewayProxyRequestEvent input;
+	private final DebugOutput input;
 
-	public Response(int executionCount, String message, APIGatewayProxyRequestEvent input) {
+	public Response(int executionCount, String message, DebugOutput input) {
 		this.executionCount = executionCount;
 		this.message = message;
 		this.input = input;
@@ -27,7 +26,7 @@ public class Response {
 	}
 
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	public APIGatewayProxyRequestEvent getInput() {
+	public DebugOutput getInput() {
 		return this.input;
 	}
 

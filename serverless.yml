@@ -7,6 +7,15 @@ provider:
   logs:
     restApi: true
   region: ap-southeast-2
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "dynamodb:*"
+      Resource: "arn:aws:dynamodb:ap-southeast-2:*:table/LanguageTest/*"
+    - Effect: Allow
+      Action:
+        - "dynamodb:*"
+      Resource: "arn:aws:dynamodb:ap-southeast-2:202544469228:table/LanguageTest"
 
 package:
   individually: true
@@ -39,3 +48,34 @@ custom:
     domainName: api.mycodefu.com
     basePath: 'language-test'
     stage: ${self:provider.stage}
+
+resources:
+  Resources:
+    QuotesDynamoTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: LanguageTest
+        AttributeDefinitions:
+          - AttributeName: TestGroup
+            AttributeType: S
+          - AttributeName: TestId
+            AttributeType: S
+          - AttributeName: ModifiedDateEpoch
+            AttributeType: N
+        KeySchema:
+          - AttributeName: TestGroup
+            KeyType: HASH
+          - AttributeName: TestId
+            KeyType: RANGE
+        LocalSecondaryIndexes:
+          - IndexName: date-modified-index
+            KeySchema:
+              - AttributeName: TestGroup
+                KeyType: HASH
+              - AttributeName: ModifiedDateEpoch
+                KeyType: RANGE
+            Projection:
+              ProjectionType: KEYS_ONLY
+        BillingMode: PAY_PER_REQUEST
+
+
