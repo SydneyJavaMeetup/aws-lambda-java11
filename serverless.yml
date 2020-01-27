@@ -24,6 +24,28 @@ plugins:
   - serverless-domain-manager
 
 functions:
+  nodejs:
+    runtime: nodejs12.x
+    handler: node/handler
+    package:
+      exclude:
+        - '.circleci/**'
+        - 'java8/**'
+        - 'java11/**'
+        - '*.json'
+        - '*.yml'
+        - '*.md'
+        - '*.iml'
+        - '*.jar'
+        - '*.js'
+        - '*.config.js'
+        - 'LICENSE'
+        - '*.sh'
+        - '.idea/**'
+    events:
+      - http:
+          path: /node12
+          method: get
   java8:
     runtime: java8
     package:

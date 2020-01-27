@@ -6,6 +6,10 @@
     "deploy": "sls deploy"
   },
   "dependencies": {
+    "uuid": "^3.4.0"
+  },
+  "devDependencies": {
+    "k6": "0.0.0",
     "serverless": "^1.61.3",
     "serverless-domain-manager": "^3.3.1"
   }
