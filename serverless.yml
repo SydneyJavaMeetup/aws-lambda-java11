@@ -29,19 +29,11 @@ functions:
     handler: node12/handler
     package:
       exclude:
-        - '.circleci/**'
-        - 'java8/**'
-        - 'java11/**'
-        - '*.json'
-        - '*.yml'
-        - '*.md'
-        - '*.iml'
-        - '*.jar'
-        - 'k6*.js'
-        - '*.config.js'
-        - 'LICENSE'
-        - '*.sh'
-        - '.idea/**'
+        - '*/**'
+        - '*'
+      include:
+        - 'node12/**'
+        - 'node_modules/uuid/**'
     events:
       - http:
           path: /node12
