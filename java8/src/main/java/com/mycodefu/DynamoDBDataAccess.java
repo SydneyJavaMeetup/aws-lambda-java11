@@ -40,7 +40,7 @@ public class DynamoDBDataAccess {
 
     public String readRecordValue(String group, String id){
         Table table = dynamoDB.getTable(tableName);
-        Item item = table.getItem("TestGroup", group, "TestId", id, "Value", null);
+        Item item = table.getItem("TestGroup", group, "TestId", id);
         return item.getString("Value");
     }
 }
