@@ -66,6 +66,7 @@ jobs:
           root: ~/repo
           paths:
             - java11/target/java11-dev.jar
+            - node12/handler.js
             - package.json
             - package-lock.json
             - serverless.yml
