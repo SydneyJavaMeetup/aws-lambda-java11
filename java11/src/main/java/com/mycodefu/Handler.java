@@ -16,6 +16,7 @@ import static com.mycodefu.JsonSerialization.prettyObjectWriter;
 
 public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 	private static final AtomicInteger executionCount = new AtomicInteger(0);
+	private static final DynamoDBDataAccess dynamoDBDataAccess = new DynamoDBDataAccess("LanguageTest");
 
 	@Override
 	public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent input, Context context) {
@@ -31,7 +32,19 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 			}
 		} catch (JsonProcessingException ignored) {}
 
-		Response response = new Response(executionCount.getAndIncrement(), "Java 11 Lambda!", debugOutput);
+		String group = (input.getQueryStringParameters() != null && input.getQueryStringParameters().containsKey("group")) ? input.getQueryStringParameters().get("group") : "DefaultGroup";
+		String value = (input.getQueryStringParameters() != null && input.getQueryStringParameters().containsKey("value")) ? input.getQueryStringParameters().get("value") : "DefaultValue";
+
+		//write and read back from DynamoDB
+		long startTime = System.nanoTime();
+		String id = dynamoDBDataAccess.createRecord(group, value);
+		String valueReadBack = dynamoDBDataAccess.readRecordValue(group, id);
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime) / 1_000_000;
+
+		String message = String.format("Java 11 Lambda wrote and read group '%s', value '%s' in %dms!", group, valueReadBack, duration);
+
+		Response response = new Response(executionCount.getAndIncrement(), message, debugOutput);
 		try {
 			String responseString = objectMapper.writeValueAsString(response);
 			APIGatewayProxyResponseEvent responseEvent = new APIGatewayProxyResponseEvent();
