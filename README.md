@@ -3,6 +3,12 @@ A comparison of AWS Lambda Java 11 with Java 8 (and NodeJS for reference).
 
 #### Comparing Languages
 
+NodeJS 12: https://api.mycodefu.com/language-test/node12
+
+Java 8: https://api.mycodefu.com/language-test/java8
+
+Java 11: https://api.mycodefu.com/language-test/java11
+
 ##### Feature Changes
 There are several new language features in Java 11, some of which may be beneficial for AWS Lambda
 use-cases. 
