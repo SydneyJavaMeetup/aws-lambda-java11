@@ -28,7 +28,9 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
-      - run: mvn package
+      - run: |
+          mvn verify sonar:sonar
+          mvn clean package
 
       - persist_to_workspace:
           root: ~/repo
@@ -98,7 +100,8 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build-java8
+      - build-java8:
+          context: SonarCloud
       - build-java11
       - deploy:
           requires:
