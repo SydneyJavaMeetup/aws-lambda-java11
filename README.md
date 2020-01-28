@@ -44,3 +44,4 @@ NodeJS cold starts were significantly better at 256ms-1.06s.
 In December 2019 AWS announced another feature that's worth mentioning which I think
 brings Java lambda more into the realm of a reasonable choice for an API: 
 [Provisioned Concurrency](https://aws.amazon.com/about-aws/whats-new/2019/12/aws-lambda-announces-provisioned-concurrency/)
+
