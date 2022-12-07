@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "k6": "0.0.0",
-    "serverless": "^1.61.3",
+    "serverless": "^3.25.1",
     "serverless-domain-manager": "^3.3.1"
   }
 }
